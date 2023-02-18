@@ -38,12 +38,12 @@ class ContactController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|digits:10'
+            'phone_number' => 'required|digits:10',
         ]);
 
         Contact::create($data);
 
-        return redirect()->route('home'); 
+        return redirect()->route('home');
     }
 
     /**
@@ -54,7 +54,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('contacts.show', compact('contact'));
     }
 
     /**
@@ -72,12 +72,12 @@ class ContactController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'phone_number' => 'required|digits:10'
+            'phone_number' => 'required|digits:10',
         ]);
 
         $contact->update($data);
 
-        return redirect()->route('home'); 
+        return redirect()->route('home');
     }
 
     /**
@@ -102,6 +102,6 @@ class ContactController extends Controller
     {
         $contact->delete();
 
-        return redirect()->route('home');  
+        return redirect()->route('home');
     }
 }

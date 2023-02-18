@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
       <div class="col-md-8">
         <div class="card">
-          <div class="card-header">Edit New Contact</div>
+          <div class="card-header">Create New Contact</div>
 
           <div class="card-body">
-            <form method="POST" action="{{ route('contacts.update') }}">
+            <form method="POST" action="{{ route('contacts.store') }}">
               @csrf
               <div class="row mb-3">
                 <label for="name"
