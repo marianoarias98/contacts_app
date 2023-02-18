@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ContactController extends Controller
 {
@@ -35,9 +36,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        Contact::create($request->all());
+        $request->validate([
+            'name' => 'required',
+            'phone_number' => 'required|digits:10'
+        ]);
 
-        return response("Contact created");
+        return response("Contact created"); 
     }
 
     /**
@@ -69,10 +73,10 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contact $contact)
-    {
-        //
-    }
+    // public function update(Request $request, Contact $contact)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
