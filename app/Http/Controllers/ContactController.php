@@ -25,7 +25,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('contact');
+        return view('Contacts.create');
     }
 
     /**
@@ -36,12 +36,14 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:10'
         ]);
 
-        return response("Contact created"); 
+        Contact::create($data);
+
+        return redirect()->route('home'); 
     }
 
     /**
@@ -63,7 +65,19 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('Contacts.edit', ['contact' => $contact]);
+    }
+
+    public function update(Contact $contact, Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'phone_number' => 'required|digits:10'
+        ]);
+
+        $contact->update($data);
+
+        return redirect()->route('home'); 
     }
 
     /**
