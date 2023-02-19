@@ -55,6 +55,8 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
+        $this->authorize('view', $contact);
+
         return view('contacts.show', compact('contact'));
     }
 
@@ -66,11 +68,14 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
+        $this->authorize('update', $contact);
         return view('Contacts.edit', ['contact' => $contact]);
     }
 
     public function update(Contact $contact, Request $request)
     {
+        $this->authorize('update', $contact);
+
         $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:10',
@@ -101,6 +106,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        $this->authorize('delete', $contact);
+
         $contact->delete();
 
         return redirect()->route('home');
