@@ -22,4 +22,4 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resourcegit ('contacts', ContactController::class);
+Route::resource('contacts', ContactController::class);
