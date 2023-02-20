@@ -40,12 +40,18 @@ class ContactController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:10',
+            'profile_picture' => 'image|nullable'
         ]);
 
-        auth()->user()->contacts()->create($data);
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profiles', 'public');
+            $data['profile_picture'] = $path;
+        }
+
+        $contact = auth()->user()->contacts()->create($data);
 
         return redirect('home')->with('alert', [
-            'message' => "Contact $request->name successfully saved",
+            'message' => "Contact $contact->name successfully saved",
             'type' => 'success',
         ]);
     }
@@ -82,13 +88,19 @@ class ContactController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'phone_number' => 'required|digits:10',
+            'profile_picture' => 'image|nullable'
         ]);
+
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('profiles', 'public');
+            $data['profile_picture'] = $path;
+        }
 
         $contact->update($data);
 
         return redirect('home')->with('alert', [
             'message' => "Contact $contact->name successfully updated",
-            'type' => 'succes',
+            'type' => 'success',
         ]);
     }
 
@@ -116,9 +128,9 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return redirect('home')->with('alert', [
+        return back()->with('alert', [
             'message' => "Contact $contact->name successfully deleted",
-            'type' => 'succes',
+            'type' => 'success',
         ]);
     }
 }

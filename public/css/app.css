@@ -11370,3 +11370,14 @@ textarea.form-control-lg {
     background-size: cover;
 }
 
+.card-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+}

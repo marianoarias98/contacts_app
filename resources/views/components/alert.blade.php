@@ -24,7 +24,7 @@
             role="alert">
             <svg class="bi flex-shrink-0 me-2" width="24" height="24"
               role="img" aria-label="Info:">
-              <use xlink:href="#{{ $type }}" />
+              <use xlink:href=" {{ $type }} " />
             </svg>
             <div>
               {{ $message }}
