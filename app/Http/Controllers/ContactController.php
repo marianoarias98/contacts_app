@@ -132,7 +132,7 @@ class ContactController extends Controller
 
         $contact->delete();
 
-        return back()->with('alert', [
+        return redirect('home')->with('alert', [
             'message' => "Contact $contact->name successfully deleted",
             'type' => 'success',
         ]);
